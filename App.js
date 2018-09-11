@@ -154,7 +154,7 @@ const RootStack = StackNavigator(
     },
   },
   {
-    mode: 'card',
+    mode: 'modal',
     headerMode: 'none',
   }
 );
