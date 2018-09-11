@@ -1,166 +1,135 @@
 import React from 'react';
-import { Button, Image, View, Text } from 'react-native';
-import { StackNavigator } from 'react-navigation'; // Version can be specified in package.json
+import { Text, View, StyleSheet } from 'react-native';
+import { createBottomTabNavigator } from 'react-navigation';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Ionicon from 'react-native-vector-icons/Ionicons';
 
-class LogoTitle extends React.Component {
-  render() {
-    return (
-      <Image
-        source={require('./spiro.png')}
-        style={{ width: 30, height: 30 }}
-      />
-    );
-  }
-}
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    paddingTop: 30,
+    justifyContent: 'space-between',
+    backgroundColor: 'blue'
 
-class HomeScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    const params = navigation.state.params || {};
-
-    return {
-      headerTitle: <LogoTitle />,
-      headerLeft: (
-        <Button
-          onPress={() => navigation.navigate('MyModal')}
-          title="Info"
-          color="#fff"
-        />
-      ),
-      headerRight: (
-        <Button onPress={params.increaseCount} title="+1" color="#fff" />
-      ),
-    };
-  };
-
-  componentWillMount() {
-    this.props.navigation.setParams({ increaseCount: this._increaseCount });
-  }
-
-  state = {
-    count: 0,
-  };
-
-  _increaseCount = () => {
-    this.setState({ count: this.state.count + 1 });
-  };
-
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
-        <Text>Count: {this.state.count}</Text>
-        <Button
-          title="Go to Details"
-          onPress={() => {
-            /* 1. Navigate to the Details route with params */
-            this.props.navigation.navigate('Details', {
-              itemId: 86,
-              otherParam: 'First Details',
-            });
-          }}
-        />
-      </View>
-    );
-  }
-}
-
-class DetailsScreen extends React.Component {
-  static navigationOptions = ({ navigation, navigationOptions }) => {
-    const { params } = navigation.state;
-
-    return {
-      title: params ? params.otherParam : 'A Nested Details Screen',
-      /* These values are used instead of the shared configuration! */
-      headerStyle: {
-        backgroundColor: navigationOptions.headerTintColor,
-      },
-      headerTintColor: navigationOptions.headerStyle.backgroundColor,
-    };
-  };
-
-  render() {
-    /* 2. Read the params from the navigation state */
-    const { params } = this.props.navigation.state;
-    const itemId = params ? params.itemId : null;
-    const otherParam = params ? params.otherParam : null;
-
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Details Screen</Text>
-        <Text>itemId: {JSON.stringify(itemId)}</Text>
-        <Text>otherParam: {JSON.stringify(otherParam)}</Text>
-        <Button
-          title="Update the title"
-          onPress={() =>
-            this.props.navigation.setParams({ otherParam: 'Updated!' })}
-        />
-        <Button
-          title="Go to Details... again"
-          onPress={() => this.props.navigation.navigate('Details')}
-        />
-        <Button
-          title="Go back"
-          onPress={() => this.props.navigation.goBack()}
-        />
-      </View>
-    );
-  }
-}
-
-class ModalScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text style={{ fontSize: 30 }}>This is a modal!</Text>
-        <Button
-          onPress={() => this.props.navigation.goBack()}
-          title="Dismiss"
-        />
-      </View>
-    );
-  }
-}
-
-const MainStack = StackNavigator(
-  {
-    Home: {
-      screen: HomeScreen,
-    },
-    Details: {
-      screen: DetailsScreen,
-    },
   },
-  {
-    initialRouteName: 'Home',
-    navigationOptions: {
-      headerStyle: {
-        backgroundColor: '#f4511e',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-    },
-  }
-);
-
-const RootStack = StackNavigator(
-  {
-    Main: {
-      screen: MainStack,
-    },
-    MyModal: {
-      screen: ModalScreen,
-    },
+  topToolbar: {
+    backgroundColor: 'blue',
+    borderBottomColor: 'black',
+    borderBottomWidth: 2,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flex: 0.1
   },
-  {
-    mode: 'card',
-    headerMode: 'none',
-  }
-);
+  
+  // Floating Action Button
+  actionButtonIcon: {
+    color: '#000'
+  },
+  actionButtonSpinner: {
+    marginLeft: -2,
+    marginTop: -2
+  },
+  // Map overlay styles
+  marker: {
+    borderWidth: 1,
+    borderColor: 'black',
+    backgroundColor: 'white',
+    borderRadius: 0,
+    zIndex: 0,
+    width: 32,
+    height: 32
+  },
+  geofenceHitMarker: {
+    borderWidth: 1,
+    borderColor: 'black',
+    borderRadius: 6,
+    zIndex: 10,
+    width: 12,
+    height: 12
+  },
+  markerIcon: {
+    borderWidth: 1,
+    borderColor: '#000000',
+    backgroundColor: 'red',
+    width: 4,
+    height: 4,
+    borderRadius: 5
+  },
+  incidentButton: {
+    backgroundColor: 'white'
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignSelf: "stretch",
+    alignItems: "center",
+  },
+  switchContainer: {
 
-export default class App extends React.Component {
+  },
+  patrolStartButtonContainer: {
+    flexDirection: "row",
+    alignSelf: "flex-end",
+  }
+});
+const authIcon = <Icon name="id-badge" style={styles.actionButtonIcon} size={25} />
+const settingsIcon = <Icon name="gear" style={styles.actionButtonIcon} size={25} />;
+const eventIcon  = <Ionicon name="ios-cloud-upload" style={styles.actionButtonIcon} size={25} />
+const BottomTabNavigatorConfig = {
+}
+
+
+class AuthScreen extends React.Component {
+
+  static navigationOptions = {
+    tabBarIcon: authIcon
+  }
+
   render() {
-    return <RootStack />;
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Auth</Text>
+      </View>
+    );
   }
 }
+
+class SettingsScreen extends React.Component {
+
+  static navigationOptions = {
+    tabBarIcon: settingsIcon
+  }
+
+
+  render() {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Settings</Text>
+      </View>
+    );
+  }
+}
+
+class EventControlScreen extends React.Component {
+
+  static navigationOptions = {
+    tabBarIcon: eventIcon
+  }
+
+  render() {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Event Control</Text>
+      </View>
+    );
+  }
+}
+
+export default createBottomTabNavigator({
+  Auth: AuthScreen,
+  EventControl: EventControlScreen,
+  Settings: SettingsScreen
+  
+}, BottomTabNavigatorConfig );
