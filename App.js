@@ -114,23 +114,8 @@ class SettingsScreen extends React.Component {
 
 class EventControlScreen extends React.Component {
 
-<<<<<<< HEAD
-const RootStack = StackNavigator(
-  {
-    Main: {
-      screen: MainStack,
-    },
-    MyModal: {
-      screen: ModalScreen,
-    },
-  },
-  {
-    mode: 'modal',
-    headerMode: 'none',
-=======
   static navigationOptions = {
     tabBarIcon: eventIcon
->>>>>>> c1bcd4810cdd52c876c34590d551e517c9f29e3b
   }
 
   render() {
