@@ -1444,6 +1444,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = mobss.rcognize;
 				PRODUCT_NAME = rcognize;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1467,6 +1468,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = mobss.rcognize;
 				PRODUCT_NAME = rcognize;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
