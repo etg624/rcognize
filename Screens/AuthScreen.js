@@ -41,7 +41,8 @@ class AuthScreen extends React.Component {
     }
 
     state = {
-        cameraType: RNCamera.Constants.Type.back
+        cameraType: RNCamera.Constants.Type.back,
+        photoPath: ''
     }
 
     render() {
@@ -67,12 +68,54 @@ class AuthScreen extends React.Component {
     }
 
     takePicture = async function () {
+        console.log('takePicture called');
         if (this.camera) {
             const options = { quality: 0.5, base64: true };
             const data = await this.camera.takePictureAsync(options)
             console.log(data.uri);
+            this.setState({ photoPath: data.uri });
+            this.uploadPhoto();
         }
     };
+
+    uploadPhoto = async function () {
+
+        if (this.state.photoPath != '') {
+
+            // Create the form data object
+            var data = new FormData();
+            data.append('picture', {
+                uri: this.state.photoPath,
+                name: 'verify.jpg',
+                type: 'image/jpg'
+            });
+
+            // Create the config object for the POST
+            // You typically have an OAuth2 token that you use for authentication
+            const config = {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    //  Authorization: 'Bearer ' + 'SECRET_OAUTH2_TOKEN_IF_AUTH'
+                },
+                body: data
+            };
+
+            console.log(config);
+
+            fetch('https://convoyer.mobsscmd.com/rcognize/verifyface', config)
+                .then(responseData => {
+                    // Log the response form the server
+                    // Here we get what we sent to Postman back
+                    console.log(responseData);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        }
+
+    }
 
     flipCamera() {
 
