@@ -1,11 +1,9 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import { createBottomTabNavigator } from 'react-navigation';
+import { Text, View, StyleSheet, Button } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Ionicon from 'react-native-vector-icons/Ionicons';
-import SettingsScreen from './Screens/SettingsScreen'
-import AuthScreen from './Screens/AuthScreen';
-import EventControlScreen from './Screens/EventControlScreen'
+import { createMaterialTopTabNavigator } from 'react-navigation';
+import AuthScreen from './AuthScreen';
 
 const styles = StyleSheet.create({
   container: {
@@ -77,15 +75,56 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
   }
 });
-const authIcon = <Icon name="id-badge" style={styles.actionButtonIcon} size={25} />
+
 const settingsIcon = <Icon name="gear" style={styles.actionButtonIcon} size={25} />;
-const eventIcon  = <Ionicon name="ios-cloud-upload" style={styles.actionButtonIcon} size={25} />
-const BottomTabNavigatorConfig = {
+
+class SettingsScreen extends React.Component {
+
+  static navigationOptions = {
+    tabBarIcon: settingsIcon
+  }
+
+
+  render() {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Settings</Text>
+      </View>
+    );
+  }
 }
 
-export default createBottomTabNavigator({
-  Auth: AuthScreen,
-  EventControl: EventControlScreen,
-  Settings: SettingsScreen
+
+const Home = () => {
+  const handlePress = () => false
+  return (
+     <Button
+        onPress = {this.onPress.bind(this) }
+        title = "Red button!"
+        color = "red"
+     />
+  )
+}
+export default Home
+module.exports = createMaterialTopTabNavigator({
   
-}, BottomTabNavigatorConfig );
+  Auth:AuthScreen
+  
+} ,{
+  tabBarOptions: {
+    labelStyle: {
+      fontSize: 12,
+    },
+    tabStyle: {
+      width: 100,
+    },
+    style: {
+      backgroundColor: 'blue',
+    },
+  }
+});
+
+
+
+
+module.exports = SettingsScreen;
