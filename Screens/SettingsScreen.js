@@ -101,6 +101,7 @@ module.exports = createMaterialTopTabNavigator({
   
 }, {
   tabBarOptions: {
+    activeTintColor: '#e91e63',
     labelStyle: {
       fontSize: 12,
     },
@@ -108,7 +109,7 @@ module.exports = createMaterialTopTabNavigator({
       width: 100,
     },
     style: {
-      backgroundColor: 'blue', 
+      backgroundColor: '#009999', 
       height: 50, 
       padding: 0, 
       margin: 20
