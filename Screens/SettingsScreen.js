@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flex: 0.1
   },
-  
+
   // Floating Action Button
   actionButtonIcon: {
     color: '#000'
@@ -94,32 +94,29 @@ class SettingsScreen extends React.Component {
   }
 }
 
-module.exports = createMaterialTopTabNavigator({
-  
+export default createMaterialTopTabNavigator({
+
   'Settings': SettingsScreen,
-  'Auth' : AuthScreen
-  
+  'Auth': AuthScreen
+
 }, {
-  tabBarOptions: {
-    activeTintColor: '#e91e63',
-    labelStyle: {
-      fontSize: 12,
-    },
-    tabStyle: {
+    tabBarOptions: {
+      activeTintColor: '#e91e63',
+      labelStyle: {
+        fontSize: 12,
+      },
+      tabStyle: {
 
-      width: 100,
-    },
-    style: {
-      borderRadius: 4000,
-      backgroundColor: '#009999', 
-      height: 50, 
-      padding: 0, 
-      margin: 20
-    },
-  }
-});
+        width: 100,
+      },
+      style: {
+        borderRadius: 4000,
+        backgroundColor: '#009999',
+        height: 50,
+        padding: 0,
+        margin: 20
+      },
+    }
+  });
 
-
-
-
-export default  SettingsScreen;
+module.exports = SettingsScreen;
