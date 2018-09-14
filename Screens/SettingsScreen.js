@@ -87,30 +87,19 @@ class SettingsScreen extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={{ flex: 0.5, justifyContent: 'center', alignItems: 'center' }}>
         <Text>Settings</Text>
       </View>
     );
   }
 }
 
-
-const Home = () => {
-  const handlePress = () => false
-  return (
-     <Button
-        onPress = {this.onPress.bind(this) }
-        title = "Red button!"
-        color = "red"
-     />
-  )
-}
-export default Home
 module.exports = createMaterialTopTabNavigator({
   
-  Auth:AuthScreen
+  'Settings': SettingsScreen,
+  'Auth' : AuthScreen
   
-} ,{
+}, {
   tabBarOptions: {
     labelStyle: {
       fontSize: 12,
@@ -119,7 +108,10 @@ module.exports = createMaterialTopTabNavigator({
       width: 100,
     },
     style: {
-      backgroundColor: 'blue',
+      backgroundColor: 'blue', 
+      height: 50, 
+      padding: 0, 
+      margin: 20
     },
   }
 });
@@ -127,4 +119,4 @@ module.exports = createMaterialTopTabNavigator({
 
 
 
-module.exports = SettingsScreen;
+export default  SettingsScreen;
