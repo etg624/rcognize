@@ -18,32 +18,22 @@ const SettingsTabs = createMaterialTopTabNavigator({
     'Auth': AuthScreen
   
   }, {
-      lazy: true,
-      tabBarOptions: {
-        activeTintColor: '#e91e63',
-        labelStyle: {
-          fontSize: 12,
-        },
-        tabStyle: {
-  
-          width: 100,
-        },
-        style: {
-          borderRadius: 4000,
-          backgroundColor: '#009999',
-          height: 50,
-          padding: 0,
-          margin: 20
-        },
-      }
+    labelStyle: {
+      fontSize: 12,
+    },
+    tabStyle: {
+      width: 100,
+    },
+    style: {
+      paddingTop: 50,
+
+    }
     });
   
     const settingsIcon = <Icon name="gear" style={styles.actionButtonIcon} size={25} />;
   
     export default class SettingsScreen extends React.Component {
 
-      
-      
         static navigationOptions = {
           tabBarIcon: settingsIcon
         }
