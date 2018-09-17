@@ -82,11 +82,19 @@ class AuthScreen extends React.Component {
 
         if (this.state.photoPath != '') {
 
-            // Create the form data object
-            var data = new FormData();
-            data.append('picture', {
+            console.log(this.state.photoPath)
+
+            let data = {
                 uri: this.state.photoPath,
                 name: 'verify.jpg',
+                type: 'image/jpg'
+            }
+
+
+            var data = new FormData();
+            data.append('my_photo', {
+                uri: this.state.photoPath, // your file path string
+                name: 'image',
                 type: 'image/jpg'
             });
 
@@ -96,13 +104,14 @@ class AuthScreen extends React.Component {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'multipart/form-data'
                     //  Authorization: 'Bearer ' + 'SECRET_OAUTH2_TOKEN_IF_AUTH'
                 },
                 body: data
             };
 
             console.log(config);
+
 
             fetch('https://convoyer.mobsscmd.com/rcognize/verifyface', config)
                 .then(responseData => {
