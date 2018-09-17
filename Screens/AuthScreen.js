@@ -92,9 +92,9 @@ class AuthScreen extends React.Component {
 
 
             var data = new FormData();
-            data.append('my_photo', {
+            data.append('image', {
                 uri: this.state.photoPath, // your file path string
-                name: 'image',
+                name: 'image.jpg',
                 type: 'image/jpg'
             });
 
@@ -117,7 +117,13 @@ class AuthScreen extends React.Component {
                 .then(responseData => {
                     // Log the response form the server
                     // Here we get what we sent to Postman back
+                    console.log('logging response data');
                     console.log(responseData);
+
+                    if (responseData.contains('no faces')){
+                        console.log('no faces');
+                    }
+
                 })
                 .catch(err => {
                     console.log(err);
