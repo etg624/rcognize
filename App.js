@@ -11,7 +11,7 @@ import EventControlScreen from './Screens/EventControlScreen'
 const BottomTabNavigatorConfig = {
 }
 
-export default createBottomTabNavigator({
+module.exports = createBottomTabNavigator({
   Auth: AuthScreen,
   EventControl: EventControlScreen,
   Settings: SettingsScreen

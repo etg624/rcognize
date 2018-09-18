@@ -110,7 +110,9 @@ module.exports = createMaterialTopTabNavigator({
       width: 100,
     },
     style: {
-      borderRadius: 4000,
+      marginTop: 16,
+      marginBottom: 0,
+      borderRadius: 400,
       backgroundColor: '#009999', 
       height: 50, 
       padding: 0, 
