@@ -7,13 +7,18 @@ import SettingsScreen from './Screens/SettingsScreen'
 import AuthScreen from './Screens/AuthScreen';
 import EventControlScreen from './Screens/EventControlScreen'
 
-
 const BottomTabNavigatorConfig = {
 }
 
-module.exports = createBottomTabNavigator({
+const RootStack = createBottomTabNavigator({
   Auth: AuthScreen,
-  EventControl: EventControlScreen,
+  'Event Control': EventControlScreen,
   Settings: SettingsScreen
 
 }, BottomTabNavigatorConfig);
+
+export default class App extends React.Component {
+  render () {
+    return <RootStack />
+  }
+}

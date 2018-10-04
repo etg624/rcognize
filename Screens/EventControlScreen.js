@@ -1,6 +1,5 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import { createBottomTabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
@@ -28,4 +27,4 @@ class EventControlScreen extends React.Component {
   }
 }
 
-module.exports = EventControlScreen;
+export default  EventControlScreen;
