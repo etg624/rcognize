@@ -8,7 +8,7 @@ import { Dropdown } from 'react-native-material-dropdown';
 const styles = StyleSheet.create({
   autoSyncSwitch: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     paddingTop: 50
   },
   textStyle: {
@@ -32,6 +32,17 @@ class GeneralSettingsScreen extends React.Component {
     });
   }
   render() {
+    const syncIntervalData =[{
+      value: '30 seconds'
+    }, {
+      value: '60 seconds'
+    }, {
+      value: '90 seconds'
+    }, {
+      value: '120 seconds'
+    }, {
+      value: '150 seconds'
+    }]
     return (
       <View >
         <View style={styles.autoSyncSwitch}>
@@ -43,7 +54,22 @@ class GeneralSettingsScreen extends React.Component {
         </View>
         <View>
           <Dropdown
-            label='Hello'
+            label='Sync Interval'
+            data={syncIntervalData}
+            rippleInsets={{ top: 60, bottom: 0, left: 0, right: 0 }}
+            containerStyle={{ width: 150, height: 40 }}
+          
+            dropdownPosition={1}
+            itemColor="rgba(0, 0, 0, .87)"
+            pickerStyle={{
+              width: 128,
+          
+              left: 0,
+              right: null,
+          
+              marginRight: 8,
+              marginTop: 90
+            }}
           />
         </View>
 
